@@ -13,8 +13,8 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-            height: 100vh;
+            overflow-x: hidden;
+            min-height: 100vh;
             position: relative;
             background: #0a0a0a;
         }
@@ -50,12 +50,11 @@
         .container {
             position: relative;
             z-index: 1;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             padding: 2rem;
             backdrop-filter: blur(10px);
-            overflow-y: auto;
         }
 
         header {
@@ -75,6 +74,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 0.5rem;
         }
 
@@ -89,6 +89,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .glass-card {
@@ -115,10 +116,6 @@
             gap: 0.5rem;
         }
 
-        .card-icon {
-            font-size: 1.5rem;
-        }
-
         .layer-control {
             margin-bottom: 1.5rem;
         }
@@ -137,7 +134,7 @@
         }
 
         .layer-value {
-            color: rgba(138, 43, 226, 0.9);
+            color: #f093fb;
             font-size: 0.9rem;
             font-weight: 600;
         }
@@ -195,31 +192,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .preset-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .preset-btn:hover::before {
-            width: 300px;
-            height: 300px;
         }
 
         .preset-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .preset-btn.active {
@@ -239,8 +217,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-            position: relative;
-            overflow: hidden;
         }
 
         .play-btn:hover {
@@ -309,28 +285,6 @@
             margin-bottom: 0.5rem;
         }
 
-        .info-text strong {
-            color: #fff;
-        }
-
-        .link-btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            margin: 0.25rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(102, 126, 234, 0.3);
-        }
-
-        .link-btn:hover {
-            background: rgba(102, 126, 234, 0.2);
-            transform: translateY(-2px);
-        }
-
         @media (max-width: 768px) {
             main {
                 grid-template-columns: 1fr;
@@ -352,29 +306,26 @@
     <div class="container">
         <header>
             <h1>🌌 AuraScape Infinity</h1>
-            <p class="subtitle">استوديوك الصوتي الذي يعيش معك، يتنفس معك، ويخلق عالماً لا يتكرر أبداً</p>
+            <p class="subtitle">استوديوك الصوتي الذي يعيش معك ويخلق عالماً لا يتكرر أبداً</p>
         </header>
 
         <main>
             <div class="glass-card">
-                <h2 class="card-title">
-                    <span class="card-icon">🎯</span>
-                    الأوضاع المسبقة
-                </h2>
+                <h2 class="card-title">🎯 الأوضاع المسبقة</h2>
                 
                 <div class="preset-buttons">
-                    <button class="preset-btn" data-preset="focus">
+                    <button class="preset-btn" onclick="applyPreset('focus')">
                         🧠<br>تركيز عميق
                     </button>
-                    <button class="preset-btn" data-preset="sleep">
+                    <button class="preset-btn" onclick="applyPreset('sleep')">
                         😴<br>نوم عميق
                     </button>
-                    <button class="preset-btn" data-preset="relax">
+                    <button class="preset-btn" onclick="applyPreset('relax')">
                         🧘<br>استرخاء
                     </button>
                 </div>
 
-                <button class="play-btn" id="playBtn">
+                <button class="play-btn" id="playBtn" onclick="togglePlay()">
                     ▶️ ابدأ التجربة
                 </button>
 
@@ -387,261 +338,232 @@
             </div>
 
             <div class="glass-card">
-                <h2 class="card-title">
-                    <span class="card-icon">🎛️</span>
-                    الطبقات الصوتية
-                </h2>
+                <h2 class="card-title">🎛️ الطبقات الصوتية</h2>
 
                 <div class="layer-control">
                     <div class="layer-header">
-                        <span class="layer-name">🌊 طبقة جوية (أمواج)</span>
+                        <span class="layer-name">🌊 أمواج المحيط</span>
                         <span class="layer-value" id="atmosphereValue">50%</span>
                     </div>
-                    <input type="range" id="atmosphere" min="0" max="100" value="50">
+                    <input type="range" id="atmosphere" min="0" max="100" value="50" oninput="updateLayer('atmosphere', this.value)">
                 </div>
 
                 <div class="layer-control">
                     <div class="layer-header">
-                        <span class="layer-name">🌲 طبقة بيئية (غابة)</span>
+                        <span class="layer-name">🌲 غابة طبيعية</span>
                         <span class="layer-value" id="environmentValue">40%</span>
                     </div>
-                    <input type="range" id="environment" min="0" max="100" value="40">
+                    <input type="range" id="environment" min="0" max="100" value="40" oninput="updateLayer('environment', this.value)">
                 </div>
 
                 <div class="layer-control">
                     <div class="layer-header">
-                        <span class="layer-name">🎵 طبقة عاطفية (نغمات)</span>
+                        <span class="layer-name">🎵 نغمات هادئة</span>
                         <span class="layer-value" id="emotionalValue">60%</span>
                     </div>
-                    <input type="range" id="emotional" min="0" max="100" value="60">
+                    <input type="range" id="emotional" min="0" max="100" value="60" oninput="updateLayer('emotional', this.value)">
                 </div>
 
                 <div class="layer-control">
                     <div class="layer-header">
-                        <span class="layer-name">🧠 ترددات Binaural</span>
+                        <span class="layer-name">🧠 ترددات علاجية</span>
                         <span class="layer-value" id="binauralValue">30%</span>
                     </div>
-                    <input type="range" id="binaural" min="0" max="100" value="30">
+                    <input type="range" id="binaural" min="0" max="100" value="30" oninput="updateLayer('binaural', this.value)">
                 </div>
             </div>
 
             <div class="glass-card">
-                <h2 class="card-title">
-                    <span class="card-icon">🎧</span>
-                    إعدادات Binaural Beats
-                </h2>
+                <h2 class="card-title">🎧 إعدادات متقدمة</h2>
 
                 <div class="layer-control">
                     <div class="layer-header">
                         <span class="layer-name">التردد الأساسي</span>
                         <span class="layer-value" id="baseFreqValue">200 Hz</span>
                     </div>
-                    <input type="range" id="baseFreq" min="100" max="500" value="200" step="10">
+                    <input type="range" id="baseFreq" min="100" max="500" value="200" step="10" oninput="updateFreq()">
                 </div>
 
                 <div class="layer-control">
                     <div class="layer-header">
-                        <span class="layer-name">فرق التردد (Beat)</span>
+                        <span class="layer-name">فرق التردد</span>
                         <span class="layer-value" id="beatFreqValue">8 Hz</span>
                     </div>
-                    <input type="range" id="beatFreq" min="1" max="40" value="8" step="1">
+                    <input type="range" id="beatFreq" min="1" max="40" value="8" step="1" oninput="updateFreq()">
                 </div>
 
                 <div class="info-box">
                     <p class="info-text">
                         <strong>💡 دليل الترددات:</strong><br>
-                        • <strong>1-4 Hz:</strong> Delta (نوم عميق)<br>
-                        • <strong>4-8 Hz:</strong> Theta (تأمل عميق)<br>
-                        • <strong>8-14 Hz:</strong> Alpha (استرخاء)<br>
-                        • <strong>14-30 Hz:</strong> Beta (تركيز نشط)
+                        • <strong>1-4 Hz:</strong> نوم عميق<br>
+                        • <strong>4-8 Hz:</strong> تأمل عميق<br>
+                        • <strong>8-14 Hz:</strong> استرخاء<br>
+                        • <strong>14-30 Hz:</strong> تركيز نشط
                     </p>
                 </div>
             </div>
 
             <div class="glass-card">
-                <h2 class="card-title">
-                    <span class="card-icon">ℹ️</span>
-                    عن المحرك التوليدي
-                </h2>
+                <h2 class="card-title">ℹ️ عن التطبيق</h2>
                 <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.8;">
                     <p style="margin-bottom: 1rem;">
-                        ✨ <strong>أصوات 100% توليدية</strong> - لا ملفات خارجية!
+                        ✨ <strong>أصوات توليدية 100%</strong><br>
+                        تم إنشاء جميع الأصوات برمجياً دون ملفات خارجية
                     </p>
                     <p style="margin-bottom: 1rem;">
-                        🎨 <strong>4 طبقات مستقلة</strong> قابلة للتحكم اللحظي
+                        🎨 <strong>4 طبقات صوتية مستقلة</strong><br>
+                        تحكم كامل في كل عنصر صوتي
                     </p>
                     <p style="margin-bottom: 1rem;">
-                        🧠 <strong>Binaural Beats</strong> علمية قابلة للتخصيص
+                        🧠 <strong>تقنية Binaural Beats</strong><br>
+                        ترددات علمية لتحسين التركيز والاسترخاء
                     </p>
-                    <p style="margin-bottom: 1rem;">
-                        ⚡ <strong>Web Audio API</strong> بأداء عالي
+                    <p>
+                        ⚡ <strong>أداء عالي</strong><br>
+                        مدعوم بتقنية Web Audio API
                     </p>
                 </div>
 
-                <div class="info-box">
+                <div class="info-box" style="margin-top: 1rem;">
                     <p class="info-text">
-                        <strong>🎵 تريد أصوات أكثر واقعية؟</strong><br>
-                        يمكنك تحميل ملفات صوتية مجانية من:
+                        <strong>🎵 نصيحة:</strong><br>
+                        استخدم سماعات الرأس للحصول على أفضل تجربة Binaural Beats
                     </p>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
-                        <a href="https://freesound.org/" target="_blank" class="link-btn">Freesound</a>
-                        <a href="https://www.zapsplat.com/" target="_blank" class="link-btn">Zapsplat</a>
-                        <a href="https://uppbeat.io/sfx" target="_blank" class="link-btn">Uppbeat</a>
-                    </div>
                 </div>
             </div>
         </main>
     </div>
 
     <script>
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let audioContext;
         let isPlaying = false;
         let startTime = 0;
         let timerInterval;
+        let visualizerInterval;
 
-        const nodes = {
+        const gains = {
             atmosphere: null,
             environment: null,
             emotional: null,
+            binaural: null
+        };
+
+        const oscillators = {
+            atmosphere: [],
+            environment: null,
+            emotional: [],
             binauralLeft: null,
-            binauralRight: null,
-            gains: {}
+            binauralRight: null
         };
 
         const presets = {
-            focus: {
-                atmosphere: 30,
-                environment: 20,
-                emotional: 70,
-                binaural: 60,
-                baseFreq: 200,
-                beatFreq: 14
-            },
-            sleep: {
-                atmosphere: 70,
-                environment: 10,
-                emotional: 40,
-                binaural: 80,
-                baseFreq: 150,
-                beatFreq: 3
-            },
-            relax: {
-                atmosphere: 60,
-                environment: 50,
-                emotional: 80,
-                binaural: 40,
-                baseFreq: 180,
-                beatFreq: 10
-            }
+            focus: { atmosphere: 30, environment: 20, emotional: 70, binaural: 60, baseFreq: 200, beatFreq: 14 },
+            sleep: { atmosphere: 70, environment: 10, emotional: 40, binaural: 80, baseFreq: 150, beatFreq: 3 },
+            relax: { atmosphere: 60, environment: 50, emotional: 80, binaural: 40, baseFreq: 180, beatFreq: 10 }
         };
 
-        function init() {
-            createAudioNodes();
-            setupEventListeners();
-            createVisualizer();
-            updateAllValues();
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                createSoundLayers();
+                console.log('✅ Audio Context initialized');
+            }
         }
 
-        function createAudioNodes() {
-            // Atmosphere Layer - Advanced Ocean Waves
-            const atmosphereOsc1 = audioContext.createOscillator();
-            atmosphereOsc1.type = 'sine';
-            atmosphereOsc1.frequency.value = 0.3;
+        function createSoundLayers() {
+            // Layer 1: Ocean Waves
+            const wave1 = audioContext.createOscillator();
+            wave1.type = 'sine';
+            wave1.frequency.value = 0.5;
             
-            const atmosphereOsc2 = audioContext.createOscillator();
-            atmosphereOsc2.type = 'sine';
-            atmosphereOsc2.frequency.value = 0.5;
+            const wave2 = audioContext.createOscillator();
+            wave2.type = 'sine';
+            wave2.frequency.value = 0.3;
             
-            const atmosphereGain = audioContext.createGain();
-            atmosphereGain.gain.value = 0;
+            const waveGain = audioContext.createGain();
+            waveGain.gain.value = 0;
             
-            const atmosphereFilter = audioContext.createBiquadFilter();
-            atmosphereFilter.type = 'lowpass';
-            atmosphereFilter.frequency.value = 300;
-            atmosphereFilter.Q.value = 2;
+            const waveFilter = audioContext.createBiquadFilter();
+            waveFilter.type = 'lowpass';
+            waveFilter.frequency.value = 400;
             
-            atmosphereOsc1.connect(atmosphereFilter);
-            atmosphereOsc2.connect(atmosphereFilter);
-            atmosphereFilter.connect(atmosphereGain);
-            atmosphereGain.connect(audioContext.destination);
-            atmosphereOsc1.start();
-            atmosphereOsc2.start();
+            wave1.connect(waveFilter);
+            wave2.connect(waveFilter);
+            waveFilter.connect(waveGain);
+            waveGain.connect(audioContext.destination);
             
-            nodes.atmosphere = [atmosphereOsc1, atmosphereOsc2];
-            nodes.gains.atmosphere = atmosphereGain;
+            wave1.start();
+            wave2.start();
+            
+            oscillators.atmosphere = [wave1, wave2];
+            gains.atmosphere = waveGain;
 
-            // Environment Layer - Enhanced Forest Sounds
-            const envBufferSize = audioContext.sampleRate * 4;
-            const envBuffer = audioContext.createBuffer(1, envBufferSize, audioContext.sampleRate);
-            const envData = envBuffer.getChannelData(0);
-            
-            for (let i = 0; i < envBufferSize; i++) {
-                const t = i / audioContext.sampleRate;
-                envData[i] = (Math.random() * 2 - 1) * Math.sin(t * Math.PI * 2);
+            // Layer 2: Forest (White Noise)
+            const bufferSize = audioContext.sampleRate * 2;
+            const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+            const output = noiseBuffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                output[i] = Math.random() * 2 - 1;
             }
             
-            const envNoise = audioContext.createBufferSource();
-            envNoise.buffer = envBuffer;
-            envNoise.loop = true;
+            const whiteNoise = audioContext.createBufferSource();
+            whiteNoise.buffer = noiseBuffer;
+            whiteNoise.loop = true;
             
-            const envGain = audioContext.createGain();
-            envGain.gain.value = 0;
+            const noiseGain = audioContext.createGain();
+            noiseGain.gain.value = 0;
             
-            const envFilter = audioContext.createBiquadFilter();
-            envFilter.type = 'bandpass';
-            envFilter.frequency.value = 2000;
-            envFilter.Q.value = 8;
+            const noiseFilter = audioContext.createBiquadFilter();
+            noiseFilter.type = 'bandpass';
+            noiseFilter.frequency.value = 2000;
+            noiseFilter.Q.value = 5;
             
-            envNoise.connect(envFilter);
-            envFilter.connect(envGain);
-            envGain.connect(audioContext.destination);
-            envNoise.start();
+            whiteNoise.connect(noiseFilter);
+            noiseFilter.connect(noiseGain);
+            noiseGain.connect(audioContext.destination);
+            whiteNoise.start();
             
-            nodes.environment = envNoise;
-            nodes.gains.environment = envGain;
+            oscillators.environment = whiteNoise;
+            gains.environment = noiseGain;
 
-            // Emotional Layer - Ambient Pad with harmonics
-            const emotionalOsc1 = audioContext.createOscillator();
-            emotionalOsc1.type = 'sine';
-            emotionalOsc1.frequency.value = 432;
+            // Layer 3: Ambient Tones
+            const tone1 = audioContext.createOscillator();
+            tone1.type = 'sine';
+            tone1.frequency.value = 432;
             
-            const emotionalOsc2 = audioContext.createOscillator();
-            emotionalOsc2.type = 'sine';
-            emotionalOsc2.frequency.value = 432 * 1.5;
+            const tone2 = audioContext.createOscillator();
+            tone2.type = 'sine';
+            tone2.frequency.value = 432 * 1.5;
             
-            const emotionalGain = audioContext.createGain();
-            emotionalGain.gain.value = 0;
+            const toneGain = audioContext.createGain();
+            toneGain.gain.value = 0;
             
-            const emotionalFilter = audioContext.createBiquadFilter();
-            emotionalFilter.type = 'lowpass';
-            emotionalFilter.frequency.value = 800;
-            emotionalFilter.Q.value = 1;
+            tone1.connect(toneGain);
+            tone2.connect(toneGain);
+            toneGain.connect(audioContext.destination);
             
-            emotionalOsc1.connect(emotionalFilter);
-            emotionalOsc2.connect(emotionalFilter);
-            emotionalFilter.connect(emotionalGain);
-            emotionalGain.connect(audioContext.destination);
-            emotionalOsc1.start();
-            emotionalOsc2.start();
+            tone1.start();
+            tone2.start();
             
-            nodes.emotional = [emotionalOsc1, emotionalOsc2];
-            nodes.gains.emotional = emotionalGain;
+            oscillators.emotional = [tone1, tone2];
+            gains.emotional = toneGain;
 
-            createBinauralNodes(200, 8);
+            // Layer 4: Binaural Beats
+            createBinaural(200, 8);
+            
+            console.log('✅ All sound layers created');
         }
 
-        function createBinauralNodes(baseFreq, beatFreq) {
-            if (nodes.binauralLeft) {
-                nodes.binauralLeft.stop();
-                nodes.binauralRight.stop();
+        function createBinaural(baseFreq, beatFreq) {
+            if (oscillators.binauralLeft) {
+                oscillators.binauralLeft.stop();
+                oscillators.binauralRight.stop();
             }
 
             const leftOsc = audioContext.createOscillator();
-            leftOsc.type = 'sine';
             leftOsc.frequency.value = baseFreq;
             
             const rightOsc = audioContext.createOscillator();
-            rightOsc.type = 'sine';
             rightOsc.frequency.value = baseFreq + beatFreq;
             
             const leftGain = audioContext.createGain();
@@ -660,51 +582,14 @@
             leftOsc.start();
             rightOsc.start();
             
-            nodes.binauralLeft = leftOsc;
-            nodes.binauralRight = rightOsc;
-            nodes.gains.binauralLeft = leftGain;
-            nodes.gains.binauralRight = rightGain;
-        }
-
-        function setupEventListeners() {
-            document.getElementById('playBtn').addEventListener('click', togglePlay);
-
-            document.querySelectorAll('.preset-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    applyPreset(btn.dataset.preset);
-                });
-            });
-
-            ['atmosphere', 'environment', 'emotional', 'binaural'].forEach(layer => {
-                document.getElementById(layer).addEventListener('input', (e) => {
-                    updateLayer(layer, e.target.value);
-                });
-            });
-
-            document.getElementById('baseFreq').addEventListener('input', (e) => {
-                const freq = parseInt(e.target.value);
-                document.getElementById('baseFreqValue').textContent = freq + ' Hz';
-                if (nodes.binauralLeft && isPlaying) {
-                    const beatFreq = parseInt(document.getElementById('beatFreq').value);
-                    createBinauralNodes(freq, beatFreq);
-                    updateLayer('binaural', document.getElementById('binaural').value);
-                }
-            });
-            
-            document.getElementById('beatFreq').addEventListener('input', (e) => {
-                const freq = parseInt(e.target.value);
-                document.getElementById('beatFreqValue').textContent = freq + ' Hz';
-                if (nodes.binauralLeft && isPlaying) {
-                    const baseFreq = parseInt(document.getElementById('baseFreq').value);
-                    createBinauralNodes(baseFreq, freq);
-                    updateLayer('binaural', document.getElementById('binaural').value);
-                }
-            });
+            oscillators.binauralLeft = leftOsc;
+            oscillators.binauralRight = rightOsc;
+            gains.binaural = { left: leftGain, right: rightGain };
         }
 
         function togglePlay() {
+            initAudio();
+            
             const btn = document.getElementById('playBtn');
             
             if (!isPlaying) {
@@ -714,29 +599,21 @@
                 btn.classList.add('playing');
                 startTimer();
                 startVisualizer();
+                
+                // Apply current slider values
+                updateLayer('atmosphere', document.getElementById('atmosphere').value);
+                updateLayer('environment', document.getElementById('environment').value);
+                updateLayer('emotional', document.getElementById('emotional').value);
+                updateLayer('binaural', document.getElementById('binaural').value);
+                
+                console.log('▶️ Playing');
             } else {
                 isPlaying = false;
                 btn.textContent = '▶️ متابعة';
                 btn.classList.remove('playing');
                 stopTimer();
                 stopVisualizer();
-            }
-        }
-
-        function applyPreset(preset) {
-            const settings = presets[preset];
-            
-            document.getElementById('atmosphere').value = settings.atmosphere;
-            document.getElementById('environment').value = settings.environment;
-            document.getElementById('emotional').value = settings.emotional;
-            document.getElementById('binaural').value = settings.binaural;
-            document.getElementById('baseFreq').value = settings.baseFreq;
-            document.getElementById('beatFreq').value = settings.beatFreq;
-            
-            updateAllValues();
-            
-            if (isPlaying) {
-                createBinauralNodes(settings.baseFreq, settings.beatFreq);
+                console.log('⏸️ Paused');
             }
         }
 
@@ -744,6 +621,98 @@
             const volume = value / 100;
             document.getElementById(layer + 'Value').textContent = value + '%';
             
+            if (!gains[layer]) return;
+            
             if (layer === 'binaural') {
-                if (nodes.gains.binauralLeft) {
-                    nodes.gains.bin
+                gains.binaural.left.gain.setTargetAtTime(volume * 0.05, audioContext.currentTime, 0.1);
+                gains.binaural.right.gain.setTargetAtTime(volume * 0.05, audioContext.currentTime, 0.1);
+            } else {
+                gains[layer].gain.setTargetAtTime(volume * 0.1, audioContext.currentTime, 0.1);
+            }
+            
+            console.log(`🎚️ ${layer}: ${value}%`);
+        }
+
+        function updateFreq() {
+            const baseFreq = parseInt(document.getElementById('baseFreq').value);
+            const beatFreq = parseInt(document.getElementById('beatFreq').value);
+            
+            document.getElementById('baseFreqValue').textContent = baseFreq + ' Hz';
+            document.getElementById('beatFreqValue').textContent = beatFreq + ' Hz';
+            
+            if (audioContext && isPlaying) {
+                createBinaural(baseFreq, beatFreq);
+                updateLayer('binaural', document.getElementById('binaural').value);
+            }
+        }
+
+        function applyPreset(presetName) {
+            const preset = presets[presetName];
+            
+            document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('atmosphere').value = preset.atmosphere;
+            document.getElementById('environment').value = preset.environment;
+            document.getElementById('emotional').value = preset.emotional;
+            document.getElementById('binaural').value = preset.binaural;
+            document.getElementById('baseFreq').value = preset.baseFreq;
+            document.getElementById('beatFreq').value = preset.beatFreq;
+            
+            updateLayer('atmosphere', preset.atmosphere);
+            updateLayer('environment', preset.environment);
+            updateLayer('emotional', preset.emotional);
+            updateLayer('binaural', preset.binaural);
+            updateFreq();
+            
+            console.log(`🎯 Preset applied: ${presetName}`);
+        }
+
+        function startTimer() {
+            startTime = Date.now();
+            timerInterval = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                const mins = Math.floor(elapsed / 60);
+                const secs = elapsed % 60;
+                document.getElementById('timer').textContent = 
+                    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+        }
+
+        function startVisualizer() {
+            const container = document.getElementById('visualizer');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 20; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.style.height = '10px';
+                container.appendChild(bar);
+            }
+            
+            visualizerInterval = setInterval(() => {
+                const bars = container.querySelectorAll('.bar');
+                bars.forEach(bar => {
+                    const height = Math.random() * 50 + 10;
+                    bar.style.height = height + 'px';
+                });
+            }, 100);
+        }
+
+        function stopVisualizer() {
+            if (visualizerInterval) {
+                clearInterval(visualizerInterval);
+            }
+        }
+
+        console.log('🌌 AuraScape Infinity loaded!');
+        console.log('💡 Click "ابدأ التجربة" to start');
+    </script>
+</body>
+</html>
