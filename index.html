@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AuraScape Infinity | استوديوك الصوتي التوليدي</title>
+    <title>🌌 AuraScape Pro - نافذتك للهدوء</title>
     <style>
         * {
             margin: 0;
@@ -13,706 +13,939 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #ffffff;
             min-height: 100vh;
-            position: relative;
-            background: #0a0a0a;
-        }
-
-        .aurora-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
-            z-index: 0;
-        }
-
-        .aurora-bg::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 40%, rgba(138, 43, 226, 0.3), transparent 50%),
-                        radial-gradient(circle at 70% 60%, rgba(0, 191, 255, 0.3), transparent 50%),
-                        radial-gradient(circle at 50% 50%, rgba(255, 105, 180, 0.2), transparent 50%);
-            animation: auroraMove 20s infinite alternate;
-        }
-
-        @keyframes auroraMove {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            100% { transform: translate(10%, 10%) rotate(10deg); }
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
         .container {
-            position: relative;
-            z-index: 1;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 40px 0;
+            margin-bottom: 30px;
+            position: relative;
         }
 
-        h1 {
-            font-size: 2.5rem;
+        .logo {
+            font-size: 3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
         }
 
-        .subtitle {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
-            letter-spacing: 1px;
+        .tagline {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
         }
 
-        main {
-            flex: 1;
+        .main-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
-        .glass-card {
+        .control-panel {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
             border-radius: 20px;
-            padding: 1.5rem;
+            padding: 30px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: fit-content;
         }
 
-        .glass-card:hover {
+        .layers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .card-title {
-            color: #fff;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #f093fb;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 10px;
         }
 
-        .layer-control {
-            margin-bottom: 1.5rem;
+        .control-group {
+            margin-bottom: 20px;
         }
 
-        .layer-header {
+        .control-label {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .layer-name {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        .layer-value {
-            color: #f093fb;
+            margin-bottom: 10px;
             font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .control-value {
+            color: #667eea;
             font-weight: 600;
         }
 
         input[type="range"] {
             width: 100%;
-            height: 6px;
-            border-radius: 5px;
+            height: 8px;
             background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
             outline: none;
             -webkit-appearance: none;
-            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
+            width: 20px;
+            height: 20px;
             background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(102, 126, 234, 0.6);
-            transition: transform 0.2s ease;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.8);
+            transition: all 0.3s ease;
         }
 
         input[type="range"]::-webkit-slider-thumb:hover {
             transform: scale(1.2);
+            box-shadow: 0 0 25px rgba(102, 126, 234, 1);
         }
 
-        input[type="range"]::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            cursor: pointer;
+        .btn {
+            padding: 15px 30px;
             border: none;
-            box-shadow: 0 0 10px rgba(102, 126, 234, 0.6);
-        }
-
-        .preset-buttons {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .preset-btn {
-            padding: 1rem;
-            border: none;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .preset-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .preset-btn.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-
-        .play-btn {
-            width: 100%;
-            padding: 1.2rem;
-            border: none;
-            border-radius: 15px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: #fff;
-            font-size: 1.2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            width: 100%;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .play-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
         }
 
-        .play-btn.playing {
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-primary.playing {
             background: linear-gradient(135deg, #f093fb, #f5576c);
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4); }
-            50% { box-shadow: 0 12px 35px rgba(245, 87, 108, 0.8); }
+            0%, 100% { box-shadow: 0 0 20px rgba(240, 147, 251, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(240, 147, 251, 0.8); }
         }
 
-        .status {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
+        .preset-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .preset-btn {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            margin-top: 1rem;
-        }
-
-        .status-text {
-            color: rgba(255, 255, 255, 0.7);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
             font-size: 0.9rem;
+            text-align: center;
         }
 
-        .status-time {
-            color: #667eea;
-            font-size: 1.5rem;
+        .preset-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .preset-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .status-box {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .status-item {
+            text-align: center;
+        }
+
+        .status-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 5px;
+        }
+
+        .status-value {
+            font-size: 1.8rem;
             font-weight: 600;
-            margin-top: 0.5rem;
+            color: #667eea;
+        }
+
+        .piano-section {
+            margin-top: 20px;
+        }
+
+        .piano-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 3px;
+        }
+
+        .piano-key {
+            padding: 25px 5px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            border: none;
+            border-bottom: 3px solid rgba(102, 126, 234, 0.5);
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.1s ease;
+            font-weight: 500;
+        }
+
+        .piano-key:active {
+            transform: translateY(2px);
+            border-bottom: 1px solid rgba(102, 126, 234, 0.5);
+            background: rgba(102, 126, 234, 0.3);
         }
 
         .visualizer {
+            width: 100%;
+            height: 150px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-bottom: 20px;
             display: flex;
-            gap: 4px;
+            align-items: center;
             justify-content: center;
-            align-items: flex-end;
-            height: 60px;
-            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .bar {
-            width: 8px;
-            background: linear-gradient(to top, #667eea, #764ba2);
-            border-radius: 4px;
-            transition: height 0.1s ease;
+        .visualizer::before {
+            content: '👆 اضغط تشغيل لبدء التجربة الصوتية';
+            position: absolute;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+        }
+
+        .visualizer.active::before {
+            display: none;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
         }
 
         .info-box {
-            margin-top: 1rem;
-            padding: 1rem;
+            padding: 15px;
             background: rgba(102, 126, 234, 0.1);
             border-radius: 10px;
             border: 1px solid rgba(102, 126, 234, 0.3);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
         }
 
-        .info-text {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.85rem;
-            line-height: 1.6;
-            margin-bottom: 0.5rem;
+        .layer-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .layer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .layer-card.active::before {
+            transform: scaleX(1);
         }
 
         @media (max-width: 768px) {
-            main {
+            .main-grid {
                 grid-template-columns: 1fr;
             }
             
-            h1 {
-                font-size: 1.8rem;
+            .logo {
+                font-size: 2rem;
             }
             
-            .preset-buttons {
+            .preset-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .piano-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="aurora-bg"></div>
+    <div class="floating-particles" id="particles"></div>
     
     <div class="container">
         <header>
-            <h1>🌌 AuraScape Infinity</h1>
-            <p class="subtitle">استوديوك الصوتي الذي يعيش معك ويخلق عالماً لا يتكرر أبداً</p>
+            <h1 class="logo">🌌 AuraScape Pro</h1>
+            <p class="tagline">نافذتك للعالم الهادئ - تجربة صوتية متكاملة</p>
         </header>
 
-        <main>
-            <div class="glass-card">
-                <h2 class="card-title">🎯 الأوضاع المسبقة</h2>
+        <div class="main-grid">
+            <div class="control-panel">
+                <h2 class="card-title">🎮 لوحة التحكم</h2>
                 
-                <div class="preset-buttons">
-                    <button class="preset-btn" onclick="applyPreset('focus')">
-                        🧠<br>تركيز عميق
-                    </button>
-                    <button class="preset-btn" onclick="applyPreset('sleep')">
-                        😴<br>نوم عميق
-                    </button>
-                    <button class="preset-btn" onclick="applyPreset('relax')">
-                        🧘<br>استرخاء
-                    </button>
-                </div>
+                <button class="btn btn-primary" id="mainBtn">▶️ ابدأ التجربة</button>
 
-                <button class="play-btn" id="playBtn" onclick="togglePlay()">
-                    ▶️ ابدأ التجربة
-                </button>
-
-                <div class="status">
-                    <p class="status-text">⏱️ وقت الجلسة</p>
-                    <p class="status-time" id="timer">00:00</p>
-                </div>
-
-                <div class="visualizer" id="visualizer"></div>
-            </div>
-
-            <div class="glass-card">
-                <h2 class="card-title">🎛️ الطبقات الصوتية</h2>
-
-                <div class="layer-control">
-                    <div class="layer-header">
-                        <span class="layer-name">🌊 أمواج المحيط</span>
-                        <span class="layer-value" id="atmosphereValue">50%</span>
+                <div class="status-box">
+                    <div class="status-item">
+                        <div class="status-label">⏱️ الوقت</div>
+                        <div class="status-value" id="timerDisplay">00:00</div>
                     </div>
-                    <input type="range" id="atmosphere" min="0" max="100" value="50" oninput="updateLayer('atmosphere', this.value)">
+                    <div class="status-item">
+                        <div class="status-label">🎵 نشط</div>
+                        <div class="status-value" id="layerCount">0/6</div>
+                    </div>
                 </div>
 
-                <div class="layer-control">
-                    <div class="layer-header">
-                        <span class="layer-name">🌲 غابة طبيعية</span>
-                        <span class="layer-value" id="environmentValue">40%</span>
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>🔊 الصوت الرئيسي</span>
+                        <span class="control-value" id="masterDisplay">100%</span>
                     </div>
-                    <input type="range" id="environment" min="0" max="100" value="40" oninput="updateLayer('environment', this.value)">
+                    <input type="range" id="masterVolume" min="0" max="100" value="100">
                 </div>
 
-                <div class="layer-control">
-                    <div class="layer-header">
-                        <span class="layer-name">🎵 نغمات هادئة</span>
-                        <span class="layer-value" id="emotionalValue">60%</span>
-                    </div>
-                    <input type="range" id="emotional" min="0" max="100" value="60" oninput="updateLayer('emotional', this.value)">
-                </div>
-
-                <div class="layer-control">
-                    <div class="layer-header">
-                        <span class="layer-name">🧠 ترددات علاجية</span>
-                        <span class="layer-value" id="binauralValue">30%</span>
-                    </div>
-                    <input type="range" id="binaural" min="0" max="100" value="30" oninput="updateLayer('binaural', this.value)">
+                <div class="preset-grid">
+                    <button class="preset-btn" data-preset="0">🧠 تركيز</button>
+                    <button class="preset-btn" data-preset="1">😴 نوم</button>
+                    <button class="preset-btn" data-preset="2">🧘 استرخاء</button>
+                    <button class="preset-btn" data-preset="3">⚡ طاقة</button>
+                    <button class="preset-btn" data-preset="4">🎨 إبداع</button>
+                    <button class="preset-btn" data-preset="5">🕉️ تأمل</button>
                 </div>
             </div>
 
-            <div class="glass-card">
-                <h2 class="card-title">🎧 إعدادات متقدمة</h2>
+            <div class="visualizer" id="visualizer">
+                <canvas id="spectrumCanvas"></canvas>
+            </div>
+        </div>
 
-                <div class="layer-control">
-                    <div class="layer-header">
-                        <span class="layer-name">التردد الأساسي</span>
-                        <span class="layer-value" id="baseFreqValue">200 Hz</span>
+        <div class="layers-grid">
+            <div class="card layer-card" data-layer="0">
+                <h2 class="card-title">🌊 أمواج المحيط</h2>
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>مستوى الصوت</span>
+                        <span class="control-value" id="display0">50%</span>
                     </div>
-                    <input type="range" id="baseFreq" min="100" max="500" value="200" step="10" oninput="updateFreq()">
+                    <input type="range" id="slider0" min="0" max="100" value="50" class="layer-slider">
                 </div>
-
-                <div class="layer-control">
-                    <div class="layer-header">
-                        <span class="layer-name">فرق التردد</span>
-                        <span class="layer-value" id="beatFreqValue">8 Hz</span>
-                    </div>
-                    <input type="range" id="beatFreq" min="1" max="40" value="8" step="1" oninput="updateFreq()">
-                </div>
-
                 <div class="info-box">
-                    <p class="info-text">
-                        <strong>💡 دليل الترددات:</strong><br>
-                        • <strong>1-4 Hz:</strong> نوم عميق<br>
-                        • <strong>4-8 Hz:</strong> تأمل عميق<br>
-                        • <strong>8-14 Hz:</strong> استرخاء<br>
-                        • <strong>14-30 Hz:</strong> تركيز نشط
-                    </p>
+                    موجات صوتية منخفضة التردد تحاكي صوت المحيط الهادئ
                 </div>
             </div>
 
-            <div class="glass-card">
-                <h2 class="card-title">ℹ️ عن التطبيق</h2>
-                <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.8;">
-                    <p style="margin-bottom: 1rem;">
-                        ✨ <strong>أصوات توليدية 100%</strong><br>
-                        تم إنشاء جميع الأصوات برمجياً دون ملفات خارجية
-                    </p>
-                    <p style="margin-bottom: 1rem;">
-                        🎨 <strong>4 طبقات صوتية مستقلة</strong><br>
-                        تحكم كامل في كل عنصر صوتي
-                    </p>
-                    <p style="margin-bottom: 1rem;">
-                        🧠 <strong>تقنية Binaural Beats</strong><br>
-                        ترددات علمية لتحسين التركيز والاسترخاء
-                    </p>
-                    <p>
-                        ⚡ <strong>أداء عالي</strong><br>
-                        مدعوم بتقنية Web Audio API
-                    </p>
+            <div class="card layer-card" data-layer="1">
+                <h2 class="card-title">🌲 غابة طبيعية</h2>
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>مستوى الصوت</span>
+                        <span class="control-value" id="display1">40%</span>
+                    </div>
+                    <input type="range" id="slider1" min="0" max="100" value="40" class="layer-slider">
                 </div>
-
-                <div class="info-box" style="margin-top: 1rem;">
-                    <p class="info-text">
-                        <strong>🎵 نصيحة:</strong><br>
-                        استخدم سماعات الرأس للحصول على أفضل تجربة Binaural Beats
-                    </p>
+                <div class="info-box">
+                    أصوات الطبيعة والطيور مع فلترة متقدمة
                 </div>
             </div>
-        </main>
+
+            <div class="card layer-card" data-layer="2">
+                <h2 class="card-title">🎵 نغمات هادئة</h2>
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>مستوى الصوت</span>
+                        <span class="control-value" id="display2">60%</span>
+                    </div>
+                    <input type="range" id="slider2" min="0" max="100" value="60" class="layer-slider">
+                </div>
+                <div class="info-box">
+                    نغمات أمبيانت بتردد 432 هرتز للاسترخاء
+                </div>
+            </div>
+
+            <div class="card layer-card" data-layer="3">
+                <h2 class="card-title">🧠 Binaural Beats</h2>
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>مستوى الصوت</span>
+                        <span class="control-value" id="display3">30%</span>
+                    </div>
+                    <input type="range" id="slider3" min="0" max="100" value="30" class="layer-slider">
+                </div>
+                <div class="info-box">
+                    ترددات علاجية لتحسين التركيز (8 Hz Alpha)
+                </div>
+            </div>
+
+            <div class="card layer-card" data-layer="4">
+                <h2 class="card-title">💨 رياح خفيفة</h2>
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>مستوى الصوت</span>
+                        <span class="control-value" id="display4">25%</span>
+                    </div>
+                    <input type="range" id="slider4" min="0" max="100" value="25" class="layer-slider">
+                </div>
+                <div class="info-box">
+                    صوت رياح هادئة مع فلترة منخفضة التردد
+                </div>
+            </div>
+
+            <div class="card layer-card" data-layer="5">
+                <h2 class="card-title">☔ مطر خفيف</h2>
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>مستوى الصوت</span>
+                        <span class="control-value" id="display5">35%</span>
+                    </div>
+                    <input type="range" id="slider5" min="0" max="100" value="35" class="layer-slider">
+                </div>
+                <div class="info-box">
+                    قطرات مطر ناعمة مع white noise مفلتر
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">🎹 بيانو تفاعلي</h2>
+            <div class="piano-grid">
+                <button class="piano-key" data-note="261.63">C</button>
+                <button class="piano-key" data-note="293.66">D</button>
+                <button class="piano-key" data-note="329.63">E</button>
+                <button class="piano-key" data-note="349.23">F</button>
+                <button class="piano-key" data-note="392.00">G</button>
+                <button class="piano-key" data-note="440.00">A</button>
+                <button class="piano-key" data-note="493.88">B</button>
+                <button class="piano-key" data-note="523.25">C</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        let audioContext;
-        let isPlaying = false;
-        let startTime = 0;
-        let timerInterval;
-        let visualizerInterval;
-
-        const gains = {
-            atmosphere: null,
-            environment: null,
-            emotional: null,
-            binaural: null
-        };
-
-        const oscillators = {
-            atmosphere: [],
-            environment: null,
-            emotional: [],
-            binauralLeft: null,
-            binauralRight: null
-        };
-
-        const presets = {
-            focus: { atmosphere: 30, environment: 20, emotional: 70, binaural: 60, baseFreq: 200, beatFreq: 14 },
-            sleep: { atmosphere: 70, environment: 10, emotional: 40, binaural: 80, baseFreq: 150, beatFreq: 3 },
-            relax: { atmosphere: 60, environment: 50, emotional: 80, binaural: 40, baseFreq: 180, beatFreq: 10 }
-        };
-
-        function initAudio() {
-            if (!audioContext) {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                createSoundLayers();
-                console.log('✅ Audio Context initialized');
-            }
-        }
-
-        function createSoundLayers() {
-            // Layer 1: Ocean Waves
-            const wave1 = audioContext.createOscillator();
-            wave1.type = 'sine';
-            wave1.frequency.value = 0.5;
-            
-            const wave2 = audioContext.createOscillator();
-            wave2.type = 'sine';
-            wave2.frequency.value = 0.3;
-            
-            const waveGain = audioContext.createGain();
-            waveGain.gain.value = 0;
-            
-            const waveFilter = audioContext.createBiquadFilter();
-            waveFilter.type = 'lowpass';
-            waveFilter.frequency.value = 400;
-            
-            wave1.connect(waveFilter);
-            wave2.connect(waveFilter);
-            waveFilter.connect(waveGain);
-            waveGain.connect(audioContext.destination);
-            
-            wave1.start();
-            wave2.start();
-            
-            oscillators.atmosphere = [wave1, wave2];
-            gains.atmosphere = waveGain;
-
-            // Layer 2: Forest (White Noise)
-            const bufferSize = audioContext.sampleRate * 2;
-            const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-            const output = noiseBuffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-                output[i] = Math.random() * 2 - 1;
-            }
-            
-            const whiteNoise = audioContext.createBufferSource();
-            whiteNoise.buffer = noiseBuffer;
-            whiteNoise.loop = true;
-            
-            const noiseGain = audioContext.createGain();
-            noiseGain.gain.value = 0;
-            
-            const noiseFilter = audioContext.createBiquadFilter();
-            noiseFilter.type = 'bandpass';
-            noiseFilter.frequency.value = 2000;
-            noiseFilter.Q.value = 5;
-            
-            whiteNoise.connect(noiseFilter);
-            noiseFilter.connect(noiseGain);
-            noiseGain.connect(audioContext.destination);
-            whiteNoise.start();
-            
-            oscillators.environment = whiteNoise;
-            gains.environment = noiseGain;
-
-            // Layer 3: Ambient Tones
-            const tone1 = audioContext.createOscillator();
-            tone1.type = 'sine';
-            tone1.frequency.value = 432;
-            
-            const tone2 = audioContext.createOscillator();
-            tone2.type = 'sine';
-            tone2.frequency.value = 432 * 1.5;
-            
-            const toneGain = audioContext.createGain();
-            toneGain.gain.value = 0;
-            
-            tone1.connect(toneGain);
-            tone2.connect(toneGain);
-            toneGain.connect(audioContext.destination);
-            
-            tone1.start();
-            tone2.start();
-            
-            oscillators.emotional = [tone1, tone2];
-            gains.emotional = toneGain;
-
-            // Layer 4: Binaural Beats
-            createBinaural(200, 8);
-            
-            console.log('✅ All sound layers created');
-        }
-
-        function createBinaural(baseFreq, beatFreq) {
-            if (oscillators.binauralLeft) {
-                oscillators.binauralLeft.stop();
-                oscillators.binauralRight.stop();
-            }
-
-            const leftOsc = audioContext.createOscillator();
-            leftOsc.frequency.value = baseFreq;
-            
-            const rightOsc = audioContext.createOscillator();
-            rightOsc.frequency.value = baseFreq + beatFreq;
-            
-            const leftGain = audioContext.createGain();
-            const rightGain = audioContext.createGain();
-            leftGain.gain.value = 0;
-            rightGain.gain.value = 0;
-            
-            const merger = audioContext.createChannelMerger(2);
-            
-            leftOsc.connect(leftGain);
-            rightOsc.connect(rightGain);
-            leftGain.connect(merger, 0, 0);
-            rightGain.connect(merger, 0, 1);
-            merger.connect(audioContext.destination);
-            
-            leftOsc.start();
-            rightOsc.start();
-            
-            oscillators.binauralLeft = leftOsc;
-            oscillators.binauralRight = rightOsc;
-            gains.binaural = { left: leftGain, right: rightGain };
-        }
-
-        function togglePlay() {
-            initAudio();
-            
-            const btn = document.getElementById('playBtn');
-            
-            if (!isPlaying) {
-                audioContext.resume();
-                isPlaying = true;
-                btn.textContent = '⏸️ إيقاف مؤقت';
-                btn.classList.add('playing');
-                startTimer();
-                startVisualizer();
+        // نظام الصوت المتقدم
+        class AuraScape {
+            constructor() {
+                this.audioContext = null;
+                this.isPlaying = false;
+                this.masterGain = null;
+                this.analyser = null;
+                this.layers = [];
+                this.gainNodes = [];
+                this.timerInterval = null;
+                this.timerSeconds = 0;
+                this.canvas = null;
+                this.canvasCtx = null;
+                this.animationId = null;
                 
-                // Apply current slider values
-                updateLayer('atmosphere', document.getElementById('atmosphere').value);
-                updateLayer('environment', document.getElementById('environment').value);
-                updateLayer('emotional', document.getElementById('emotional').value);
-                updateLayer('binaural', document.getElementById('binaural').value);
-                
-                console.log('▶️ Playing');
-            } else {
-                isPlaying = false;
-                btn.textContent = '▶️ متابعة';
-                btn.classList.remove('playing');
-                stopTimer();
-                stopVisualizer();
-                console.log('⏸️ Paused');
+                // الأوضاع المسبقة
+                this.presets = [
+                    [30, 20, 70, 60, 15, 10], // تركيز
+                    [70, 10, 40, 80, 5, 20],  // نوم
+                    [60, 50, 80, 40, 30, 25], // استرخاء
+                    [20, 30, 90, 70, 40, 10], // طاقة
+                    [40, 40, 85, 50, 35, 20], // إبداع
+                    [50, 30, 60, 90, 20, 15]  // تأمل
+                ];
+
+                this.init();
             }
-        }
 
-        function updateLayer(layer, value) {
-            const volume = value / 100;
-            document.getElementById(layer + 'Value').textContent = value + '%';
-            
-            if (!gains[layer]) return;
-            
-            if (layer === 'binaural') {
-                gains.binaural.left.gain.setTargetAtTime(volume * 0.05, audioContext.currentTime, 0.1);
-                gains.binaural.right.gain.setTargetAtTime(volume * 0.05, audioContext.currentTime, 0.1);
-            } else {
-                gains[layer].gain.setTargetAtTime(volume * 0.1, audioContext.currentTime, 0.1);
+            init() {
+                this.setupEventListeners();
+                this.createParticles();
+                this.setupCanvas();
             }
-            
-            console.log(`🎚️ ${layer}: ${value}%`);
-        }
 
-        function updateFreq() {
-            const baseFreq = parseInt(document.getElementById('baseFreq').value);
-            const beatFreq = parseInt(document.getElementById('beatFreq').value);
-            
-            document.getElementById('baseFreqValue').textContent = baseFreq + ' Hz';
-            document.getElementById('beatFreqValue').textContent = beatFreq + ' Hz';
-            
-            if (audioContext && isPlaying) {
-                createBinaural(baseFreq, beatFreq);
-                updateLayer('binaural', document.getElementById('binaural').value);
-            }
-        }
+            setupEventListeners() {
+                // زر التشغيل الرئيسي
+                document.getElementById('mainBtn').addEventListener('click', () => this.togglePlay());
 
-        function applyPreset(presetName) {
-            const preset = presets[presetName];
-            
-            document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            document.getElementById('atmosphere').value = preset.atmosphere;
-            document.getElementById('environment').value = preset.environment;
-            document.getElementById('emotional').value = preset.emotional;
-            document.getElementById('binaural').value = preset.binaural;
-            document.getElementById('baseFreq').value = preset.baseFreq;
-            document.getElementById('beatFreq').value = preset.beatFreq;
-            
-            updateLayer('atmosphere', preset.atmosphere);
-            updateLayer('environment', preset.environment);
-            updateLayer('emotional', preset.emotional);
-            updateLayer('binaural', preset.binaural);
-            updateFreq();
-            
-            console.log(`🎯 Preset applied: ${presetName}`);
-        }
-
-        function startTimer() {
-            startTime = Date.now();
-            timerInterval = setInterval(() => {
-                const elapsed = Math.floor((Date.now() - startTime) / 1000);
-                const mins = Math.floor(elapsed / 60);
-                const secs = elapsed % 60;
-                document.getElementById('timer').textContent = 
-                    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-            }, 1000);
-        }
-
-        function stopTimer() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-            }
-        }
-
-        function startVisualizer() {
-            const container = document.getElementById('visualizer');
-            container.innerHTML = '';
-            
-            for (let i = 0; i < 20; i++) {
-                const bar = document.createElement('div');
-                bar.className = 'bar';
-                bar.style.height = '10px';
-                container.appendChild(bar);
-            }
-            
-            visualizerInterval = setInterval(() => {
-                const bars = container.querySelectorAll('.bar');
-                bars.forEach(bar => {
-                    const height = Math.random() * 50 + 10;
-                    bar.style.height = height + 'px';
+                // مستوى الصوت الرئيسي
+                document.getElementById('masterVolume').addEventListener('input', (e) => {
+                    this.updateMasterVolume(e.target.value);
                 });
-            }, 100);
-        }
 
-        function stopVisualizer() {
-            if (visualizerInterval) {
-                clearInterval(visualizerInterval);
+                // الأوضاع المسبقة
+                document.querySelectorAll('.preset-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const preset = parseInt(e.target.dataset.preset);
+                        this.applyPreset(preset);
+                    });
+                });
+
+                // طبقات الصوت
+                document.querySelectorAll('.layer-slider').forEach(slider => {
+                    slider.addEventListener('input', (e) => {
+                        const layer = parseInt(e.target.id.replace('slider', ''));
+                        const value = e.target.value;
+                        this.updateLayerVolume(layer, value);
+                    });
+                });
+
+                // بيانو
+                document.querySelectorAll('.piano-key').forEach(key => {
+                    key.addEventListener('click', (e) => {
+                        const freq = parseFloat(e.target.dataset.note);
+                        this.playPianoNote(freq);
+                    });
+                });
+            }
+
+            setupCanvas() {
+                this.canvas = document.getElementById('spectrumCanvas');
+                this.canvasCtx = this.canvas.getContext('2d');
+                this.canvas.width = this.canvas.offsetWidth;
+                this.canvas.height = this.canvas.offsetHeight;
+            }
+
+            async initAudio() {
+                if (this.audioContext) return;
+
+                try {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    
+                    // إنشاء العقد الرئيسية
+                    this.masterGain = this.audioContext.createGain();
+                    this.analyser = this.audioContext.createAnalyser();
+                    this.analyser.fftSize = 256;
+                    this.analyser.smoothingTimeConstant = 0.8;
+                    
+                    this.masterGain.connect(this.analyser);
+                    this.analyser.connect(this.audioContext.destination);
+                    
+                    await this.createLayers();
+                    
+                    console.log('✅ نظام الصوت جاهز');
+                } catch (error) {
+                    console.error('❌ خطأ في تهيئة الصوت:', error);
+                }
+            }
+
+            async createLayers() {
+                // طبقة 1: أمواج المحيط (مذبذب منخفض التردد)
+                const wave1 = this.audioContext.createOscillator();
+                wave1.type = 'sine';
+                wave1.frequency.value = 0.5;
+                const gain1 = this.audioContext.createGain();
+                gain1.gain.value = 0;
+                wave1.connect(gain1);
+                gain1.connect(this.masterGain);
+                    wave1.start();
+                this.layers.push({ source: wave1, gain: gain1, type: 'oscillator' });
+
+                // طبقة 2: غابة (ضجيج أبيض مفلتر)
+                const noise2 = this.createNoiseBuffer();
+                const noiseSource2 = this.audioContext.createBufferSource();
+                noiseSource2.buffer = noise2;
+                noiseSource2.loop = true;
+                
+                const filter2 = this.audioContext.createBiquadFilter();
+                filter2.type = 'bandpass';
+                filter2.frequency.value = 2000;
+                filter2.Q.value = 5;
+                
+                const gain2 = this.audioContext.createGain();
+                gain2.gain.value = 0;
+                
+                noiseSource2.connect(filter2);
+                filter2.connect(gain2);
+                gain2.connect(this.masterGain);
+                noiseSource2.start();
+                
+                this.layers.push({ source: noiseSource2, gain: gain2, filter: filter2, type: 'noise' });
+
+                // طبقة 3: نغمات هادئة (432 هرتز)
+                const tone3 = this.audioContext.createOscillator();
+                tone3.type = 'sine';
+                tone3.frequency.value = 432;
+                const gain3 = this.audioContext.createGain();
+                gain3.gain.value = 0;
+                tone3.connect(gain3);
+                gain3.connect(this.masterGain);
+                tone3.start();
+                this.layers.push({ source: tone3, gain: gain3, type: 'oscillator' });
+
+                // طبقة 4: Binaural Beats
+                const left4 = this.audioContext.createOscillator();
+                const right4 = this.audioContext.createOscillator();
+                left4.frequency.value = 200;
+                right4.frequency.value = 208;
+                
+                const merger4 = this.audioContext.createChannelMerger(2);
+                const gain4 = this.audioContext.createGain();
+                gain4.gain.value = 0;
+                
+                left4.connect(merger4, 0, 0);
+                right4.connect(merger4, 0, 1);
+                merger4.connect(gain4);
+                gain4.connect(this.masterGain);
+                
+                left4.start();
+                right4.start();
+                
+                this.layers.push({ source: [left4, right4], gain: gain4, type: 'binaural' });
+
+                // طبقة 5: رياح
+                const wind5 = this.audioContext.createOscillator();
+                wind5.type = 'sine';
+                wind5.frequency.value = 0.3;
+                
+                const filter5 = this.audioContext.createBiquadFilter();
+                filter5.type = 'lowpass';
+                filter5.frequency.value = 400;
+                
+                const gain5 = this.audioContext.createGain();
+                gain5.gain.value = 0;
+                
+                wind5.connect(filter5);
+                filter5.connect(gain5);
+                gain5.connect(this.masterGain);
+                wind5.start();
+                
+                this.layers.push({ source: wind5, gain: gain5, filter: filter5, type: 'oscillator' });
+
+                // طبقة 6: مطر
+                const rain6 = this.createNoiseBuffer();
+                const rainSource6 = this.audioContext.createBufferSource();
+                rainSource6.buffer = rain6;
+                rainSource6.loop = true;
+                
+                const filter6 = this.audioContext.createBiquadFilter();
+                filter6.type = 'bandpass';
+                filter6.frequency.value = 1000;
+                filter6.Q.value = 3;
+                
+                const gain6 = this.audioContext.createGain();
+                gain6.gain.value = 0;
+                
+                rainSource6.connect(filter6);
+                filter6.connect(gain6);
+                gain6.connect(this.masterGain);
+                rainSource6.start();
+                
+                this.layers.push({ source: rainSource6, gain: gain6, filter: filter6, type: 'noise' });
+            }
+
+            createNoiseBuffer() {
+                const bufferSize = this.audioContext.sampleRate * 2;
+                const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
+                const output = buffer.getChannelData(0);
+                
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+                
+                return buffer;
+            }
+
+            async togglePlay() {
+                const btn = document.getElementById('mainBtn');
+                
+                if (!this.audioContext) {
+                    await this.initAudio();
+                }
+
+                if (this.isPlaying) {
+                    this.stop();
+                    btn.textContent = '▶️ ابدأ التجربة';
+                    btn.classList.remove('playing');
+                } else {
+                    await this.audioContext.resume();
+                    this.start();
+                    btn.textContent = '⏸️ إيقاف مؤقت';
+                    btn.classList.add('playing');
+                }
+            }
+
+            start() {
+                this.isPlaying = true;
+                this.startTimer();
+                this.startVisualization();
+                this.updateAllLayers();
+                document.getElementById('visualizer').classList.add('active');
+            }
+
+            stop() {
+                this.isPlaying = false;
+                this.stopTimer();
+                this.stopVisualization();
+                document.getElementById('visualizer').classList.remove('active');
+            }
+
+            updateMasterVolume(value) {
+                document.getElementById('masterDisplay').textContent = value + '%';
+                if (this.masterGain) {
+                    this.masterGain.gain.setTargetAtTime(value / 100, this.audioContext.currentTime, 0.1);
+                }
+            }
+
+            updateLayerVolume(layer, value) {
+                document.getElementById('display' + layer).textContent = value + '%';
+                
+                if (this.layers[layer]) {
+                    const volume = value / 1000; // قيم منخفضة للتحكم الأفضل
+                    this.layers[layer].gain.gain.setTargetAtTime(volume, this.audioContext.currentTime, 0.1);
+                }
+                
+                this.updateActiveCount();
+                this.updateLayerCard(layer, value > 0);
+            }
+
+            updateLayerCard(layer, isActive) {
+                const card = document.querySelector(`[data-layer="${layer}"]`);
+                if (isActive) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            }
+
+            updateAllLayers() {
+                for (let i = 0; i < 6; i++) {
+                    const value = document.getElementById('slider' + i).value;
+                    this.updateLayerVolume(i, value);
+                }
+            }
+
+            updateActiveCount() {
+                let active = 0;
+                for (let i = 0; i < 6; i++) {
+                    if (document.getElementById('slider' + i).value > 0) active++;
+                }
+                document.getElementById('layerCount').textContent = active + '/6';
+            }
+
+            applyPreset(presetIndex) {
+                // إزالة active من الكل
+                document.querySelectorAll('.preset-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // إضافة active للمختار
+                document.querySelector(`[data-preset="${presetIndex}"]`).classList.add('active');
+                
+                // تطبيق القيم
+                const values = this.presets[presetIndex];
+                for (let i = 0; i < 6; i++) {
+                    document.getElementById('slider' + i).value = values[i];
+                    this.updateLayerVolume(i, values[i]);
+                }
+            }
+
+            playPianoNote(frequency) {
+                if (!this.audioContext) return;
+
+                const oscillator = this.audioContext.createOscillator();
+                const gainNode = this.audioContext.createGain();
+
+                oscillator.type = 'sine';
+                oscillator.frequency.value = frequency;
+
+                gainNode.gain.value = 0.1;
+                gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.5);
+
+                oscillator.connect(gainNode);
+                gainNode.connect(this.audioContext.destination);
+
+                oscillator.start();
+                oscillator.stop(this.audioContext.currentTime + 0.5);
+            }
+
+            startTimer() {
+                this.timerSeconds = 0;
+                this.timerInterval = setInterval(() => {
+                    this.timerSeconds++;
+                    const minutes = Math.floor(this.timerSeconds / 60);
+                    const seconds = this.timerSeconds % 60;
+                    document.getElementById('timerDisplay').textContent = 
+                        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }, 1000);
+            }
+
+            stopTimer() {
+                if (this.timerInterval) {
+                    clearInterval(this.timerInterval);
+                    this.timerInterval = null;
+                }
+            }
+
+            startVisualization() {
+                const draw = () => {
+                    if (!this.isPlaying) return;
+
+                    const bufferLength = this.analyser.frequencyBinCount;
+                    const dataArray = new Uint8Array(bufferLength);
+                    this.analyser.getByteFrequencyData(dataArray);
+
+                    this.canvasCtx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+                    this.canvasCtx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+                    const barWidth = (this.canvas.width / bufferLength) * 2.5;
+                    let barHeight;
+                    let x = 0;
+
+                    for (let i = 0; i < bufferLength; i++) {
+                        barHeight = (dataArray[i] / 255) * this.canvas.height;
+
+                        const r = Math.floor((dataArray[i] / 255) * 100 + 155);
+                        const g = Math.floor((dataArray[i] / 255) * 50 + 100);
+                        const b = Math.floor(250 - (dataArray[i] / 255) * 100);
+
+                        this.canvasCtx.fillStyle = `rgb(${r},${g},${b})`;
+                        this.canvasCtx.fillRect(x, this.canvas.height - barHeight, barWidth, barHeight);
+
+                        x += barWidth + 1;
+                    }
+
+                    this.animationId = requestAnimationFrame(draw);
+                };
+
+                draw();
+            }
+
+            stopVisualization() {
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                    this.animationId = null;
+                }
+                
+                // مسح المخطط
+                this.canvasCtx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+                this.canvasCtx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+
+            createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                
+                for (let i = 0; i < 50; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 20 + 's';
+                    particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+                    particlesContainer.appendChild(particle);
+                }
             }
         }
 
-        console.log('🌌 AuraScape Infinity loaded!');
-        console.log('💡 Click "ابدأ التجربة" to start');
+        // تهيئة التطبيق
+        document.addEventListener('DOMContentLoaded', () => {
+            new AuraScape();
+        });
     </script>
 </body>
 </html>
